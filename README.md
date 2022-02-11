@@ -1,6 +1,7 @@
 # app-rating-predictor
 
 SC1015 Data Science Project
+Group Members: Aaron, Ivan, Yifei
 
 ## Git Flow
 
