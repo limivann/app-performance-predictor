@@ -1,0 +1,16 @@
+{
+	"name": "google-play-scrapper",
+	"version": "1.0.0",
+	"description": "Scapper for google play apps",
+	"main": "app.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"start": "node app.js"
+	},
+	"author": "Ivan",
+	"license": "ISC",
+	"dependencies": {
+		"csv-writer": "^1.6.0",
+		"google-play-scraper": "^8.1.0"
+	}
+}
