@@ -41,7 +41,7 @@ gplay
 				size: data.size,
 				content_rating: data.contentRating,
 				ad_supported: data.adSupported,
-				in_app_purchases: data.in_app_purchases,
+				in_app_purchases: data.offersIAP,
 			},
 		];
 		await csvWriter.writeRecords(formattedData);
