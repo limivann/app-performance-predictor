@@ -1,7 +1,6 @@
 const gplay = require("google-play-scraper");
 const createCsvWriter = require("csv-writer").createObjectCsvWriter;
-// import { categories } from "./constants.js";
-const categories = [gplay.category.GAME_ACTION, gplay.category.GAME_PUZZLE];
+const categories = require("./constants/categories.js");
 const csvWriter = createCsvWriter({
 	path: "./output/dump.csv",
 	header: [
@@ -72,7 +71,6 @@ const scrappingPromise = new Promise((res, rej) => {
 		});
 		categoryPromise.then(async data => {
 			finalCsvData = [...finalCsvData, ...data];
-			console.log(data);
 			if (count == numOfCats) {
 				res(finalCsvData);
 			}
