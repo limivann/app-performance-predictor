@@ -1,8 +1,9 @@
 const gplay = require("google-play-scraper");
 const createCsvWriter = require("csv-writer").createObjectCsvWriter;
 
+// csv headers
 const csvWriter = createCsvWriter({
-	path: "./output/topFreeActionGames.csv",
+	path: "../output/example.csv",
 	header: [
 		{ id: "app_name", title: "APP_NAME" },
 		{ id: "rating", title: "RATING" },
@@ -21,37 +22,28 @@ const csvWriter = createCsvWriter({
 	],
 });
 
-const numOfScrapes = 1;
-console.log(`Scrapping ${numOfScrapes} top free action games ...`);
-
 gplay
-	.list({
-		category: gplay.category.GAME_ACTION,
-		collection: gplay.collection.TOP_FREE,
-		num: numOfScrapes,
-		fullDetail: true,
-	})
+	.app({ appId: "com.google.android.apps.translate" })
 	.then(async data => {
-		// array of objects\
-		const formattedData = [];
-		data.map(async appDetails => {
-			formattedData.push({
-				app_name: appDetails.title,
-				rating: appDetails.score,
-				category: appDetails.genre,
-				rating_count: appDetails.ratings,
-				installs: appDetails.installs,
-				min_installs: appDetails.minInstalls,
-				max_installs: appDetails.maxInstalls,
-				free: appDetails.free,
-				price: appDetails.price,
-				currency: appDetails.currency,
-				size: appDetails.size,
-				content_rating: appDetails.contentRating,
-				ad_supported: appDetails.adSupported,
-				in_app_purchases: appDetails.offersIAP,
-			});
-		});
+		// array of objects
+		let formattedData = [
+			{
+				app_name: data.title,
+				rating: data.score,
+				category: data.genre,
+				rating_count: data.ratings,
+				installs: data.installs,
+				min_installs: data.minInstalls,
+				max_installs: data.maxInstalls,
+				free: data.free,
+				price: data.price,
+				currency: data.currency,
+				size: data.size,
+				content_rating: data.contentRating,
+				ad_supported: data.adSupported,
+				in_app_purchases: data.offersIAP,
+			},
+		];
 		await csvWriter.writeRecords(formattedData);
 	})
 	.then(() => console.log("Scrapped complete!"))

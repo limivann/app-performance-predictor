@@ -1,7 +1,9 @@
+// change this 1 to 500
+const numOfScrapes = 1;
+
 const gplay = require("google-play-scraper");
 const createCsvWriter = require("csv-writer").createObjectCsvWriter;
-
-// csv headers
+const categories = require("./constants/categories.js");
 const csvWriter = createCsvWriter({
 	path: "./output/output.csv",
 	header: [
@@ -22,29 +24,58 @@ const csvWriter = createCsvWriter({
 	],
 });
 
-gplay
-	.app({ appId: "com.google.android.apps.translate" })
-	.then(async data => {
-		// array of objects
-		let formattedData = [
-			{
-				app_name: data.title,
-				rating: data.score,
-				category: data.genre,
-				rating_count: data.ratings,
-				installs: data.installs,
-				min_installs: data.minInstalls,
-				max_installs: data.maxInstalls,
-				free: data.free,
-				price: data.price,
-				currency: data.currency,
-				size: data.size,
-				content_rating: data.contentRating,
-				ad_supported: data.adSupported,
-				in_app_purchases: data.offersIAP,
-			},
-		];
-		await csvWriter.writeRecords(formattedData);
-	})
-	.then(() => console.log("Scrapped complete!"))
-	.catch(err => console.log("Something went wrong " + err));
+const numOfCats = categories.length;
+let count = 0;
+console.log("Scrapping all Cats ... ");
+
+let finalCsvData = [];
+const scrappingPromise = new Promise((res, rej) => {
+	categories.forEach(async category => {
+		console.log(`Scrapping ${numOfScrapes} TOP FREE ${category} ...`);
+		const categoryPromise = new Promise((res, rej) => {
+			gplay
+				.list({
+					category: category,
+					collection: gplay.collection.TOP_FREE,
+					num: numOfScrapes,
+					fullDetail: true,
+				})
+				.then(async data => {
+					// array of objects\
+					const formattedData = [];
+					data.map(async appDetails => {
+						formattedData.push({
+							app_name: appDetails.title,
+							rating: appDetails.score,
+							category: appDetails.genre,
+							rating_count: appDetails.ratings,
+							installs: appDetails.installs,
+							min_installs: appDetails.minInstalls,
+							max_installs: appDetails.maxInstalls,
+							free: appDetails.free,
+							price: appDetails.price,
+							currency: appDetails.currency,
+							size: appDetails.size,
+							content_rating: appDetails.contentRating,
+							ad_supported: appDetails.adSupported,
+							in_app_purchases: appDetails.offersIAP,
+						});
+					});
+					res(formattedData);
+					count++;
+				})
+				.then(() => console.log(`Scrapped complete for ${category}`))
+				.catch(err =>
+					console.log(`Something when wrong when scrapping ${category}` + err)
+				);
+		});
+		categoryPromise.then(async data => {
+			finalCsvData = [...finalCsvData, ...data];
+			if (count == numOfCats) {
+				res(finalCsvData);
+			}
+		});
+	});
+});
+
+scrappingPromise.then(async data => await csvWriter.writeRecords(data));

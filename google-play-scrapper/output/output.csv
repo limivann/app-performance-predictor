@@ -1,2 +1,13 @@
 APP_NAME,RATING,CATEGORY,RATING_COUNT,INSTALLS,MIN_INSTALLS,MAX_INSTALLS,FREE,PRICE,CURRENCY,SIZE,CONTENT_RATING,AD_SUPPORTED,IN_APP_PURCHASES
-Google Translate,4.4306126,Tools,8301733,"1,000,000,000+",1000000000,1105968973,true,0,USD,Varies with device,Everyone,false,false
+Battery Run,3.982301,Action,5986,"5,000,000+",5000000,5006395,true,0,USD,89M,Everyone,true,false
+Count Masters - Stickman Clash,3.7272727,Action,280282,"100,000,000+",100000000,112659527,true,0,USD,96M,Everyone 10+,true,false
+Sandwich Runner,4.0840335,Action,13758,"10,000,000+",10000000,14062800,true,0,USD,91M,Everyone 10+,true,false
+Gem Stack,4.091837,Action,257,"100,000+",100000,100946,true,0,USD,93M,Everyone,true,true
+Snake Troll : Thief master,3.64,Puzzle,1228,"1,000,000+",1000000,3564031,true,0,USD,139M,Everyone,true,true
+Fishdom,4.3504095,Puzzle,5297190,"100,000,000+",100000000,259982908,true,0,USD,144M,Everyone,true,true
+Zen Match,4.392141,Puzzle,267184,"10,000,000+",10000000,12295358,true,0,USD,Varies with device,Everyone,true,true
+Paper Fold,4.3909373,Puzzle,690728,"50,000,000+",50000000,85567596,true,0,USD,Varies with device,Everyone,true,true
+Phone Evolution,2.254902,Role Playing,619,"500,000+",500000,510407,true,0,USD,120M,Teen,true,false
+MY HERO ULTRA IMPACT,4.4295774,Role Playing,12421,"500,000+",500000,852851,true,0,USD,58M,Teen,false,true
+Chrono Legacy: Strategy RPG,4.663934,Role Playing,1773,"100,000+",100000,115652,true,0,USD,860M,Teen,false,true
+My Heroes: Dungeon Raid,4.6264153,Role Playing,9973,"100,000+",100000,262942,true,0,USD,529M,Teen,true,true

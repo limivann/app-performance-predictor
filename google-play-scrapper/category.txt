@@ -1,5 +1,10 @@
 Available categories
 
+Categories in ./constants/categories.js are in the format of 
+gplay.category.{CATEGORY}
+
+For example: gplay.category.APPLICATION
+
 APPLICATION: 'APPLICATION',
 ANDROID_WEAR: 'ANDROID_WEAR',
 ART_AND_DESIGN: 'ART_AND_DESIGN',
