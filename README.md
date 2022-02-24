@@ -3,72 +3,48 @@
 SC1015 Data Science Project
 Group Members: Aaron, Ivan, Yifei
 
-## Git Flow
+# Project Plan
 
-Make sure you are at the outermost directory and on the branch main
+## Marking Rubrics
 
-1\. Add all git files that you want to commit
+1. 10% for coming up with your own problem definition based on a dataset
 
-Add all files in current directory ( the . stands for current)
+2. 10% for data preparation and cleaning to suit the problem of your choice
 
-```terminal
-git add .
-```
+3. 20% for exploratory data analysis/visualization to gather relevant insights
 
-Add all files in a specific directory
+4. 20% for the use of machine learning techniques to solve specific problem
 
-```terminal
-git add <path>
-```
+5. 20% for the presentation of data-driven insights and the recommendations
 
-2\. Commit the files with a message
+6. 10% for the quality of your final team presentation and overall impressions
 
-```terminal
-git commit -m <message>
-```
+7. 10% for learning something new and doing something beyond this course
 
-For Example:
+## Problem statement
 
-```terminal
-git commit -m "cleaned dataset"
-```
+1. Machine learning main goal: predict rating of the app using features.
+2. Which country makes the best app
+3. Which genre of apps has the highest rating
+4. Does content rating, price(free / paid), ad supported apps has impact on the rating
+5. Does size of the app affect total installs? (some ppl dont like to install large apps)
 
-3\. Change to another branch other than main
+Feel free to add more problems...
 
-```terminal
-git checkout -b <branch_name>
-```
+## Data preparation and cleaning
 
-For Example:
+Dataset link: [google-playstore-apps](https://www.kaggle.com/gauthamp10/google-playstore-apps)
 
-```terminal
-git checkout -b clean_dataset
-```
+Scrapper folder `./google-play-scrapper`
 
-4\. Pull latest updates from github
+## Exploration data analysis
 
-```terminal
-git pull origin <branch_name>
-```
+## Machine learning techniques
 
-<strong>Make sure there is no merge conflict before you push the code</strong>
+Problem type: Numerical
 
-5\. Push to branch
+Linear Regression?
 
-```terminal
-git push origin <branch_name>
-```
+## Presentation of data driven insights
 
-6\. Merge into main branch at github
-
-- Manually merge in github
-
-7\. Go back to main branch
-
-```terminal
-git checkout main
-```
-
-8\. Delete branch created
-
-- Manually delete branch
+Tableau ftw
