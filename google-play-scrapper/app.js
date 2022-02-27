@@ -4,6 +4,8 @@ const numOfScrapes = 1;
 const gplay = require("google-play-scraper");
 const createCsvWriter = require("csv-writer").createObjectCsvWriter;
 const categories = require("./constants/categories.js");
+const collections = require("./constants/collections");
+
 const csvWriter = createCsvWriter({
 	path: "./output/output.csv",
 	header: [
@@ -21,76 +23,91 @@ const csvWriter = createCsvWriter({
 		{ id: "content_rating", title: "CONTENT_RATING" },
 		{ id: "ad_supported", title: "AD_SUPPORTED" },
 		{ id: "in_app_purchases", title: "IN_APP_PURCHASES" },
-		{ id: "scrapped_time", title: "SCRAPED_TIME" },
+		{ id: "day_scraped", title: "DAY_SCRAPED" },
+		{ id: "collection", title: "COLLECTIONS" },
 	],
 });
-
 const numOfCats = categories.length;
-let count = 0;
+const numOfCollections = collections.length;
+
+console.log(numOfCollections, numOfCats);
+let currentCount = 0;
+const countGoal = numOfCollections * numOfCats;
+let finalCsvData = [];
+
+const formatDate = (date, format) => {
+	const map = {
+		mm: date.getMonth() + 1,
+		dd: date.getDate(),
+		yy: date.getFullYear().toString().slice(-2),
+		yyyy: date.getFullYear(),
+	};
+
+	return format.replace(/mm|dd|yy|yyy/gi, matched => map[matched]);
+};
+
 console.log("Scrapping all Cats ... ");
 console.time(
 	`Time for scraping ${numOfScrapes} for each ${numOfCats} categories`
 );
-let finalCsvData = [];
-const scrappingPromise = new Promise((res, rej) => {
-	categories.forEach(async category => {
-		console.log(`Scrapping ${numOfScrapes} TOP FREE ${category} ...`);
-		const categoryPromise = new Promise((res, rej) => {
-			console.time(`Time taken for scrapping ${category}`);
-			gplay
-				.list({
-					category: category,
-					collection: gplay.collection.TOP_FREE,
-					num: numOfScrapes,
-					fullDetail: true,
-				})
-				.then(async data => {
-					// array of objects\
-					const formattedData = [];
-					data.map(async appDetails => {
-						formattedData.push({
-							app_name: appDetails.title,
-							rating: appDetails.score,
-							category: appDetails.genre,
-							rating_count: appDetails.ratings,
-							installs: appDetails.installs,
-							min_installs: appDetails.minInstalls,
-							max_installs: appDetails.maxInstalls,
-							free: appDetails.free,
-							price: appDetails.price,
-							currency: appDetails.currency,
-							size: appDetails.size,
-							content_rating: appDetails.contentRating,
-							ad_supported: appDetails.adSupported,
-							in_app_purchases: appDetails.offersIAP,
+
+const scrappedAllDataPromise = new Promise((resolveSAP, rej) => {
+	collections.forEach(async collection => {
+		console.log(`SCRAPING COLLECTION: ${collection}`);
+		console.log("==================================");
+		categories.forEach(async category => {
+			const categoryPromise = new Promise((resCP, rej) => {
+				gplay
+					.list({
+						category: category,
+						collection: collection,
+						num: numOfScrapes,
+						fullDetail: true,
+					})
+					.then(async data => {
+						const formattedData = [];
+						const today = new Date();
+						const formattedDate = formatDate(today, "dd/mm/yy");
+
+						data.map(async appDetails => {
+							formattedData.push({
+								app_name: appDetails.title,
+								rating: appDetails.score,
+								category: appDetails.genre,
+								rating_count: appDetails.ratings,
+								installs: appDetails.installs,
+								min_installs: appDetails.minInstalls,
+								max_installs: appDetails.maxInstalls,
+								free: appDetails.free,
+								price: appDetails.price,
+								currency: appDetails.currency,
+								size: appDetails.size,
+								content_rating: appDetails.contentRating,
+								ad_supported: appDetails.adSupported,
+								in_app_purchases: appDetails.offersIAP,
+								day_scraped: formattedDate,
+								collection: collection,
+							});
 						});
+						resCP(formattedData);
+						currentCount++;
+						console.log(
+							`SCRAPING COMPLETE FOR ${category} FOR THE COLLECTION ${collection}`
+						);
 					});
-					res(formattedData);
-					count++;
-				})
-				.then(() => {
-					console.log(`Scrapped complete for ${category}`);
-					console.timeEnd(`Time taken for scrapping ${category}`);
-				})
-				.catch(err =>
-					console.log(`Something when wrong when scrapping ${category}` + err)
-				);
-		});
-		categoryPromise.then(async data => {
-			finalCsvData = [...finalCsvData, ...data];
-			if (count == numOfCats) {
-				res(finalCsvData);
-			}
+			});
+			categoryPromise.then(async data => {
+				finalCsvData = [...finalCsvData, ...data];
+				if (currentCount == countGoal) {
+					resolveSAP(finalCsvData);
+				}
+			});
 		});
 	});
 });
 
-scrappingPromise
-	.then(async data => await csvWriter.writeRecords(data))
-	.then(() => {
-		console.log("Done writing into output.csv");
-		console.timeEnd(
-			`Time for scraping ${numOfScrapes} for each ${numOfCats} categories`
-		);
+scrappedAllDataPromise
+	.then(async data => {
+		let status = await csvWriter.writeRecords(data);
 	})
-	.catch(err => console.log("Error found: " + err));
+	.then(() => console.log("WRITE TO FILE COMPLETE"));

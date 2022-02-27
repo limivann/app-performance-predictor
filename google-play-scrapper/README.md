@@ -20,7 +20,7 @@ To change the number of scrapes go to `app.js` and change the value of **numOfSc
 
 To change the categories to scrape go to `./constants/categories` and add/remove items from the array
 
-For more information on categories type please refer to `categories.txt`
+For more information on categories type please refer to `options.txt`
 
 ## Run
 
