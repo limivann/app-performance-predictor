@@ -21,18 +21,22 @@ const csvWriter = createCsvWriter({
 		{ id: "content_rating", title: "CONTENT_RATING" },
 		{ id: "ad_supported", title: "AD_SUPPORTED" },
 		{ id: "in_app_purchases", title: "IN_APP_PURCHASES" },
+		{ id: "scrapped_time", title: "SCRAPED_TIME" },
 	],
 });
 
 const numOfCats = categories.length;
 let count = 0;
 console.log("Scrapping all Cats ... ");
-
+console.time(
+	`Time for scraping ${numOfScrapes} for each ${numOfCats} categories`
+);
 let finalCsvData = [];
 const scrappingPromise = new Promise((res, rej) => {
 	categories.forEach(async category => {
 		console.log(`Scrapping ${numOfScrapes} TOP FREE ${category} ...`);
 		const categoryPromise = new Promise((res, rej) => {
+			console.time(`Time taken for scrapping ${category}`);
 			gplay
 				.list({
 					category: category,
@@ -64,7 +68,10 @@ const scrappingPromise = new Promise((res, rej) => {
 					res(formattedData);
 					count++;
 				})
-				.then(() => console.log(`Scrapped complete for ${category}`))
+				.then(() => {
+					console.log(`Scrapped complete for ${category}`);
+					console.timeEnd(`Time taken for scrapping ${category}`);
+				})
 				.catch(err =>
 					console.log(`Something when wrong when scrapping ${category}` + err)
 				);
@@ -78,4 +85,12 @@ const scrappingPromise = new Promise((res, rej) => {
 	});
 });
 
-scrappingPromise.then(async data => await csvWriter.writeRecords(data));
+scrappingPromise
+	.then(async data => await csvWriter.writeRecords(data))
+	.then(() => {
+		console.log("Done writing into output.csv");
+		console.timeEnd(
+			`Time for scraping ${numOfScrapes} for each ${numOfCats} categories`
+		);
+	})
+	.catch(err => console.log("Error found: " + err));
