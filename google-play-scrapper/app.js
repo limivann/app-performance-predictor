@@ -1,6 +1,6 @@
 // change this 1 to 500
-const numOfScrapes = 200;
-const fileName = "output_1";
+const numOfScrapes = 20;
+const fileName = "output_test";
 
 const gplay = require("google-play-scraper");
 const createCsvWriter = require("csv-writer").createObjectCsvWriter;
@@ -25,7 +25,11 @@ const csvWriter = createCsvWriter({
 		{ id: "category", title: "CATEGORY" },
 		{ id: "collection", title: "COLLECTIONS" },
 		{ id: "rating_count", title: "RATING_COUNT" },
-		{ id: "rating_hist", title: "RATING_HISTOGRAM" },
+		{ id: "rating_1", title: "1_STAR_RATINGS" },
+		{ id: "rating_2", title: "2_STAR_RATINGS" },
+		{ id: "rating_3", title: "3_STAR_RATINGS" },
+		{ id: "rating_4", title: "4_STAR_RATINGS" },
+		{ id: "rating_5", title: "5_STAR_RATINGS" },
 		{ id: "review_count", title: "REVIEW_COUNT" },
 		{ id: "installs", title: "INSTALLS" },
 		{ id: "min_installs", title: "MIN_INSTALLS" },
@@ -70,10 +74,16 @@ const sleepFor = sleepDuration => {
 	}
 };
 
-console.log("Scrapping all Cats ... ");
-console.time(
-	`Time for scraping ${numOfScrapes} for each ${numOfCats} categories`
-);
+const listOfSkippedCategoriesForTopPaid = [gplay.category.GAME_ACTION];
+
+const listOfSkippedCategoriesForGrossing = [
+	gplay.category.GAME_ACTION,
+	gplay.category.GAME_BOARD,
+	gplay.category.GAME_ADVENTURE,
+];
+
+console.log("STARTING GOOGLE PLAY SCRAPER");
+console.time("TIME FOR SCRAPING ALL CATS");
 
 const scrappedAllDataPromise = new Promise((resolveSAP, rejSAP) => {
 	collections.forEach(async collection => {
@@ -81,7 +91,34 @@ const scrappedAllDataPromise = new Promise((resolveSAP, rejSAP) => {
 		console.log(`SCRAPING COLLECTION: ${collection}`);
 		console.log("==================================");
 		categories.forEach(async category => {
+			sleepFor(4000);
+			console.log(
+				`SCRAPPING CATEGORY: ${category} IN COLLECTION ${collection}`
+			);
 			const categoryPromise = new Promise((resCP, rejCP) => {
+				if (collection === gplay.collection.TOP_FREE) {
+					// Check
+				}
+				if (collection == gplay.collection.TOP_PAID) {
+					if (listOfSkippedCategoriesForTopPaid.includes(category)) {
+						currentCount++;
+						resCP([]);
+						console.log(
+							`SCRAPING COMPLETE FOR ${category} FOR THE COLLECTION ${collection} [SKIPPED]`
+						);
+						return;
+					}
+				}
+				if (collection == gplay.collection.GROSSING) {
+					if (listOfSkippedCategoriesForGrossing.includes(category)) {
+						currentCount++;
+						resCP([]);
+						console.log(
+							`SCRAPING COMPLETE FOR ${category} FOR THE COLLECTION ${collection} [SKIPPED]`
+						);
+						return;
+					}
+				}
 				gplay
 					.list({
 						category: category,
@@ -98,7 +135,12 @@ const scrappedAllDataPromise = new Promise((resolveSAP, rejSAP) => {
 							const dateObj = new Date(appDetails.updated);
 							const lastUpdatedDate = formatDate(dateObj, "dd/mm/yy");
 
-							const rating_hist = JSON.stringify(appDetails.histogram);
+							const rating_hist = appDetails.histogram;
+							const rating_1 = rating_hist["1"];
+							const rating_2 = rating_hist["2"];
+							const rating_3 = rating_hist["3"];
+							const rating_4 = rating_hist["4"];
+							const rating_5 = rating_hist["5"];
 
 							formattedData.push({
 								app_name: appDetails.title,
@@ -106,7 +148,11 @@ const scrappedAllDataPromise = new Promise((resolveSAP, rejSAP) => {
 								category: appDetails.genre,
 								collection: collection,
 								rating_count: appDetails.ratings,
-								rating_hist: rating_hist,
+								rating_1: rating_1,
+								rating_2: rating_2,
+								rating_3: rating_3,
+								rating_4: rating_4,
+								rating_5: rating_5,
 								review_count: appDetails.reviews,
 								installs: appDetails.installs,
 								min_installs: appDetails.minInstalls,
@@ -125,8 +171,8 @@ const scrappedAllDataPromise = new Promise((resolveSAP, rejSAP) => {
 								day_scraped: formattedDate,
 							});
 						});
-						resCP(formattedData);
 						currentCount++;
+						resCP(formattedData);
 						console.log(
 							`SCRAPING COMPLETE FOR ${category} FOR THE COLLECTION ${collection}`
 						);
@@ -157,4 +203,10 @@ scrappedAllDataPromise
 	.then(async data => {
 		let status = await csvWriter.writeRecords(data);
 	})
-	.then(() => console.log("WRITE TO FILE COMPLETE"));
+	.then(() => {
+		console.log("WRITE TO FILE COMPLETE");
+		console.timeEnd("TIME FOR SCRAPING ALL CATS");
+	})
+	.catch(err => {
+		console.log("SOMETHING WENT WRONG: " + err);
+	});

@@ -1,14 +1,14 @@
 const gplay = require("google-play-scraper");
 const categories = [
 	gplay.category.APPLICATION,
-	gplay.category.ANDROID_WEAR,
-	gplay.category.ART_AND_DESIGN,
-	gplay.category.AUTO_AND_VEHICLES,
-	gplay.category.BEAUTY,
-	gplay.category.BOOKS_AND_REFERENCE,
-	gplay.category.BUSINESS,
-	gplay.category.COMICS,
-	gplay.category.COMMUNICATION,
+	// gplay.category.ANDROID_WEAR,
+	// gplay.category.ART_AND_DESIGN,
+	// gplay.category.AUTO_AND_VEHICLES,
+	// gplay.category.BEAUTY,
+	// gplay.category.BOOKS_AND_REFERENCE,
+	// gplay.category.BUSINESS,
+	// gplay.category.COMICS,
+	// gplay.category.COMMUNICATION,
 	// gplay.category.DATING,
 	// gplay.category.EDUCATION,
 	// gplay.category.ENTERTAINMENT,
@@ -35,6 +35,7 @@ const categories = [
 	// gplay.category.VIDEO_PLAYERS,
 	// gplay.category.WATCH_FACE,
 	// gplay.category.WEATHER,
+	// gplay.category.FAMILY,
 	// gplay.category.GAME,
 	// gplay.category.GAME_ACTION,
 	// gplay.category.GAME_ADVENTURE,
@@ -53,7 +54,6 @@ const categories = [
 	// gplay.category.GAME_STRATEGY,
 	// gplay.category.GAME_TRIVIA,
 	// gplay.category.GAME_WORD,
-	// gplay.category.FAMILY,
 ];
 
 module.exports = categories;
