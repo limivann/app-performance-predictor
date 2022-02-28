@@ -1,7 +1,7 @@
-APP_NAME,RATING,CATEGORY,RATING_COUNT,INSTALLS,MIN_INSTALLS,MAX_INSTALLS,FREE,PRICE,CURRENCY,SIZE,CONTENT_RATING,AD_SUPPORTED,IN_APP_PURCHASES,DAY_SCRAPED,COLLECTIONS
-10bii Financial Calculator,4.43,Finance,760,"50,000+",50000,53653,false,5.99,USD,6.5M,Everyone,false,true,28/2/22,topselling_paid
-QuickBooks Self-Employed:Mileage Tracker and Taxes,3.744486,Finance,30625,"5,000,000+",5000000,5925063,true,0,USD,174M,Everyone,false,true,28/2/22,topgrossing
-Minecraft,4.6057386,Arcade,4492926,"10,000,000+",10000000,40347143,false,7.49,USD,Varies with device,Everyone 10+,false,true,28/2/22,topselling_paid
-Candy Crush Saga,4.629148,Casual,33360090,"1,000,000,000+",1000000000,1331970686,true,0,USD,Varies with device,Everyone,true,true,28/2/22,topgrossing
-Merge Master - Dinosaur Fusion,4.083141,Arcade,43772,"10,000,000+",10000000,11505782,true,0,USD,119M,Everyone 10+,true,true,28/2/22,topselling_free
-Cash App,4.5681915,Finance,1062893,"50,000,000+",50000000,64512293,true,0,USD,Varies with device,Everyone,true,false,28/2/22,topselling_free
+APP_NAME,RATING,CATEGORY,COLLECTIONS,RATING_COUNT,RATING_HISTOGRAM,REVIEW_COUNT,INSTALLS,MIN_INSTALLS,MAX_INSTALLS,FREE,PRICE,CURRENCY,SIZE,DEVELOPER,CONTENT_RATING,FAMILY_GENRE,AD_SUPPORTED,IN_APP_PURCHASES,RELEASED_DATE,LAST_UPDATED,DAY_SCRAPED
+Google One,4.387993,Productivity,topgrossing,301739,"{""1"":22530,""2"":6980,""3"":19302,""4"":34985,""5"":217931}",28551,"500,000,000+",500000000,590124527,true,0,USD,Varies with device,Google LLC,Everyone,,false,true,"May 24, 2018",26/2/22,28/2/22
+TikTok,4.534255,Social,topselling_free,45986737,"{""1"":3300427,""2"":732799,""3"":1404592,""4"":3208756,""5"":37340139}",1812150,"1,000,000,000+",1000000000,2012536382,true,0,USD,97M,TikTok Pte. Ltd.,Teen,,true,true,"Jul 9, 2015",26/2/22,28/2/22
+Spotify: Music and Podcasts,4.3627934,Music & Audio,topselling_free,25246086,"{""1"":2290811,""2"":771699,""3"":1015839,""4"":2576902,""5"":18590816}",1522458,"1,000,000,000+",1000000000,1272865305,true,0,USD,Varies with device,Spotify AB,Teen,,true,false,"May 27, 2014",22/2/22,28/2/22
+HotSchedules,3.2041407,Productivity,topselling_paid,22053,"{""1"":7516,""2"":1687,""3"":1369,""4"":1730,""5"":9746}",8573,"1,000,000+",1000000,1149860,false,2.99,USD,39M,HotSchedules,Everyone,,false,false,"Aug 17, 2010",17/2/22,28/2/22
+Pandora - Music & Podcasts,4.1615515,Music & Audio,topgrossing,3355040,"{""1"":411157,""2"":128708,""3"":194032,""4"":394204,""5"":2226935}",844346,"100,000,000+",100000000,278178538,true,0,USD,Varies with device,Pandora,Teen,,true,true,,27/1/22,28/2/22
+Chester Inform,3.9230769,Personalization,topselling_paid,99,"{""1"":15,""2"":7,""3"":7,""4"":7,""5"":60}",19,"1,000+",1000,2262,false,1.19,USD,Varies with device,Maxim Ivannikov,Everyone,,false,false,"Feb 7, 2022",26/2/22,28/2/22
