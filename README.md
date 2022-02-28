@@ -43,9 +43,13 @@ Scrapper folder `./google-play-scrapper`
 ## Machine learning techniques
 
 Problem 1: Predicting the rating of the app (Numerical)
+
 Linear Regression
+
 Problem 2: Prediciting the app price (free/paid)
+
 Classification
+
 Problem 3: Predicting size of the app?
 
 ## Presentation of data driven insights
