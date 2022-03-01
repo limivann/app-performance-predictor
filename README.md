@@ -25,12 +25,13 @@ Group Members: Aaron, Ivan, Yifei
 
 1. Machine learning main goal: predict rating of the app using features.
 2. Which genre of apps has the highest rating
-3. Does content rating, price(free / paid), ad supported apps has impact on the rating
-4. Does size of the app affect total installs? (some ppl dont like to install large apps)
-5. Which type of games is the most successful
-6. Best developers and their top categories
-7. Developers that made the most apps
-8. FAANG, which company made the best apps
+3. Which country makes the best apps
+4. Does content rating, price(free / paid), ad supported apps has impact on the rating
+5. Does size of the app affect total installs? (some ppl dont like to install large apps)
+6. Which type of games is the most successful
+7. Best developers and their top categories
+8. Developers that made the most apps
+9. FAANG, which company made the best apps
 
 ## Data preparation and cleaning
 
