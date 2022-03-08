@@ -1,6 +1,6 @@
 // change this 1 to 500
-const numOfScrapes = 350;
-const fileName = "output_6";
+const numOfScrapes = 500;
+const fileName = "output_9";
 
 const gplay = require("google-play-scraper");
 const createCsvWriter = require("csv-writer").createObjectCsvWriter;
@@ -44,6 +44,7 @@ const csvWriter = createCsvWriter({
 		{ id: "family_genre", title: "FAMILY_GENRE" },
 		{ id: "ad_supported", title: "AD_SUPPORTED" },
 		{ id: "in_app_purchases", title: "IN_APP_PURCHASES" },
+		{ id: "editors_choice", title: "EDITORS_CHOICE" },
 		{ id: "released_date", title: "RELEASED_DATE" },
 		{ id: "last_updated", title: "LAST_UPDATED" },
 		{ id: "day_scraped", title: "DAY_SCRAPED" },
@@ -168,6 +169,7 @@ const scrappedAllDataPromise = new Promise((resolveSAP, rejSAP) => {
 								family_genre: appDetails.familyGenre,
 								ad_supported: appDetails.adSupported,
 								in_app_purchases: appDetails.offersIAP,
+								editors_choice: appDetails.editorsChoice,
 								released_date: appDetails.released,
 								last_updated: lastUpdatedDate,
 								day_scraped: formattedDate,
