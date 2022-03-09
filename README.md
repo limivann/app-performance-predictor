@@ -32,6 +32,7 @@ Group Members: Aaron, Ivan, Yifei
 7. Best developers and their top categories
 8. Developers that made the most apps
 9. FAANG, which company made the best apps
+10. 
 
 ## Data preparation and cleaning
 
