@@ -34,7 +34,11 @@ Group Members: Aaron, Ivan, Yifei
 9. FAANG, which company made the best apps?
 10. How to get "High" Rating on Play Store?
 11. Market breakdown by game category, which category has most downloads?
-12. 
+12. App rating distribution
+13. Rating VS size/price band/free or paid/installs
+14. Pricing trend, how to price your app?  (Swarmplot)
+15. Number of reviews VS Number of downloads
+16. 
 
 ## Data preparation and cleaning
 
