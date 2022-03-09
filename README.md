@@ -38,7 +38,7 @@ Group Members: Aaron, Ivan, Yifei
 13. Rating VS size/price band/free or paid/installs
 14. Pricing trend, how to price your app?  (Swarmplot)
 15. Number of reviews VS Number of downloads
-16. 
+16. Does editor's choice affect ratings?
 
 ## Data preparation and cleaning
 
