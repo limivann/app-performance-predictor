@@ -26,7 +26,7 @@ Group Members: Aaron, Ivan, Yifei
 1. Machine learning main goal: predict rating of the app using features.
 2. Which genre of apps has the highest rating?
 3. Which country makes the best apps?
-4. Does content rating, price(free / paid), ad supported apps has impact on the rating?
+4. Does content rating, price(free / paid), ad supported apps, and in apps purchases has impact on the rating and install count?
 5. Does size of the app affect total installs? (some people don't like to install large apps)
 6. Which type of games is the most successful?
 7. Best developers and their top categories.
