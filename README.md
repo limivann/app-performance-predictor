@@ -33,6 +33,8 @@ Group Members: Aaron, Ivan, Yifei
 8. Developers that made the most apps.
 9. FAANG, which company made the best apps?
 10. How to get "High" Rating on Play Store?
+11. Market breakdown by game category, which category has most downloads?
+12. 
 
 ## Data preparation and cleaning
 
