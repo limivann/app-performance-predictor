@@ -28,25 +28,25 @@ Group Members: Aaron, Ivan, Yifei
 3. Which country makes the best apps?
 
 Dev
-Best developers and their top categories.
-Developers that made the most apps.
+- Best developers and their top categories.
+- Developers that made the most apps.
 
 Yifei
-Does editor's choice affect ratings and installs?
-Does size of the app affect total installs? (some people don't like to install large apps)
-Does content rating, price(free / paid), ad supported apps has impact on the rating?
-Does in game purchases affect rating
-Does Day since updated affect rating
-Does day since released affect installs (find apps that has less installs despite released for a long time)
-How to get "High" Rating on Play Store?
+- Does editor's choice affect ratings and installs?
+- Does size of the app affect total installs? (some people don't like to install large apps)
+- Does content rating, price(free / paid), ad supported apps has impact on the rating?
+- Does in game purchases affect rating
+- Does Day since updated affect rating
+- Does day since released affect installs (find apps that has less installs despite released for a long time)
+- How to get "High" Rating on Play Store?
 
 Aaron
-FANG, which company made the best apps?
-Top singapore company apps?
-App rating distribution
-Rating VS size/price band/free or paid/installs
-Pricing trend, how to price your app? (Swarmplot)
-Number of reviews VS Number of downloads
+- FANG, which company made the best apps?
+- Top singapore company apps?
+- App rating distribution
+- Rating VS size/price band/free or paid/installs
+- Pricing trend, how to price your app? (Swarmplot)
+- Number of reviews VS Number of downloads
 
 ## Data preparation and cleaning
 
