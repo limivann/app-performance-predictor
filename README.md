@@ -26,19 +26,27 @@ Group Members: Aaron, Ivan, Yifei
 1. Machine learning main goal: predict rating of the app using features.
 2. Which genre of apps has the highest rating?
 3. Which country makes the best apps?
-4. Does content rating, price(free / paid), ad supported apps, and in apps purchases has impact on the rating and install count?
-5. Does size of the app affect total installs? (some people don't like to install large apps)
-6. Which type of games is the most successful?
-7. Best developers and their top categories.
-8. Developers that made the most apps.
-9. FAANG, which company made the best apps?
-10. How to get "High" Rating on Play Store?
-11. Market breakdown by game category, which category has most downloads?
-12. App rating distribution
-13. Rating VS size/price band/free or paid/installs
-14. Pricing trend, how to price your app?  (Swarmplot)
-15. Number of reviews VS Number of downloads
-16. Does editor's choice affect ratings?
+
+Dev
+Best developers and their top categories.
+Developers that made the most apps.
+
+Yifei
+Does editor's choice affect ratings and installs?
+Does size of the app affect total installs? (some people don't like to install large apps)
+Does content rating, price(free / paid), ad supported apps has impact on the rating?
+Does in game purchases affect rating
+Does Day since updated affect rating
+Does day since released affect installs (find apps that has less installs despite released for a long time)
+How to get "High" Rating on Play Store?
+
+Aaron
+FANG, which company made the best apps?
+Top singapore company apps?
+App rating distribution
+Rating VS size/price band/free or paid/installs
+Pricing trend, how to price your app? (Swarmplot)
+Number of reviews VS Number of downloads
 
 ## Data preparation and cleaning
 
