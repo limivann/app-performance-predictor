@@ -43,13 +43,11 @@ Yifei
 Aaron
 - App rating distribution
 - Top singapore company apps?
-- FANG, which company made the best apps?
-
-
 - Rating VS size/price/installs
-- Pricing trend, how to price your app? (Swarmplot)
 - Number of reviews VS Number of downloads
-
+- FANG, which company made the best apps?
+- How to price your app?
+- 
 ## Data preparation and cleaning
 
 Dataset link: [google-playstore-apps](https://www.kaggle.com/gauthamp10/google-playstore-apps)
