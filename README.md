@@ -41,10 +41,12 @@ Yifei
 - How to get "High" Rating on Play Store?
 
 Aaron
-- FANG, which company made the best apps?
-- Top singapore company apps?
 - App rating distribution
-- Rating VS size/price band/free or paid/installs
+- Top singapore company apps?
+- FANG, which company made the best apps?
+
+
+- Rating VS size/price/installs
 - Pricing trend, how to price your app? (Swarmplot)
 - Number of reviews VS Number of downloads
 
