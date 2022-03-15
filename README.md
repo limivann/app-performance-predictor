@@ -34,8 +34,7 @@ Dev
 Yifei
 - Does editor's choice affect ratings and installs?
 - Does size of the app affect total installs? (some people don't like to install large apps)
-- Does content rating, price(free / paid), ad supported apps has impact on the rating?
-- Does in game purchases affect rating
+- Does content rating, price(free / paid), ad supported apps, in app purchases has impact on the rating?
 - Does Day since updated affect rating
 - Does day since released affect installs (find apps that has less installs despite released for a long time)
 - How to get "High" Rating on Play Store?
