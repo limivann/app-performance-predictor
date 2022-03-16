@@ -26,20 +26,27 @@ Group Members: Aaron, Ivan, Yifei
 1. Machine learning main goal: predict rating of the app using features.
 2. Which genre of apps has the highest rating?
 3. Which country makes the best apps?
-4. Does content rating, price(free / paid), ad supported apps, and in apps purchases has impact on the rating and install count?
-5. Does size of the app affect total installs? (some people don't like to install large apps)
-6. Which type of games is the most successful?
-7. Best developers and their top categories.
-8. Developers that made the most apps.
-9. FAANG, which company made the best apps?
-10. How to get "High" Rating on Play Store?
-11. Market breakdown by game category, which category has most downloads?
-12. App rating distribution
-13. Rating VS size/price band/free or paid/installs
-14. Pricing trend, how to price your app?  (Swarmplot)
-15. Number of reviews VS Number of downloads
-16. Does editor's choice affect ratings?
 
+Dev
+- Best developers and their top categories.
+- Developers that made the most apps.
+
+Yifei
+- Does editor's choice affect ratings and installs?
+- Does size of the app affect total installs? (some people don't like to install large apps)
+- Does content rating, price(free / paid), ad supported apps, in app purchases has impact on the rating?
+- Does Day since updated affect rating
+- Does day since released affect installs (find apps that has less installs despite released for a long time)
+- How to get "High" Rating on Play Store?
+
+Aaron
+- App rating distribution
+- Top singapore company apps?
+- Rating VS size/price/installs
+- Number of reviews VS Number of downloads
+- FANG, which company made the best apps?
+- How to price your app?
+- 
 ## Data preparation and cleaning
 
 Dataset link: [google-playstore-apps](https://www.kaggle.com/gauthamp10/google-playstore-apps)
@@ -50,15 +57,13 @@ Scrapper folder `./google-play-scrapper`
 
 ## Machine learning techniques
 
-Problem 1: Predicting the rating of the app (Numerical)
+Initial Goal: Predicting the rating of the app (Numerical)
 
 Linear Regression
 
-Problem 2: Prediciting the app price (free/paid)
+Actual Goal: Predicting the market size of the app (Categorical)
 
 Classification
-
-Problem 3: Predicting size of the app?
 
 ## Presentation of data driven insights
 
