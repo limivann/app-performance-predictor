@@ -7,6 +7,7 @@ import seaborn as sb
 sb.set_theme(style="white", palette=None)
 
 #https://medium.com/mlearning-ai/explore-make-predictions-and-evaluate-your-ml-models-with-streamlit-and-pipelines-b6c3efeb92ff
+from introduction import PrintIntro
 
 class plot_type:
     def __init__(self,data):
@@ -94,7 +95,7 @@ df = get_cleaned_data()
 
 # config css
 with open("./styles/styles.css") as f:
-    st.markdown(f'<style>{f.read()}</style>',unsafe_allow_html=True)
+    st.markdown(f'<head><style>{f.read()}</style><head>',unsafe_allow_html=True)
 
 
 google_play_store_img = Image.open('./images/image_google_play-store.webp')
@@ -102,13 +103,7 @@ google_play_store_img = Image.open('./images/image_google_play-store.webp')
 #pages
 if condition == 'Introduction':
     st.image(google_play_store_img, caption='Windows 11 introduces support on Google Play')
-    st.write(
-    '''
-        # Android Market Analysis
-        Analysis of the Android market using app data from Google Play Store
-
-        Team Members: Aaron, Ivan, Yifei
-    ''')
+    PrintIntro.printIntro()
 elif condition == 'EDA':
     st.write(
     '''
@@ -118,6 +113,7 @@ elif condition == 'EDA':
     ''')
     title("Ratings",24,"black")
     
+    # chart 1
     fig1, axes =  plt.subplots(1, 2, figsize = (15, 5))
     f = sb.histplot(df, x = "RATING", ax = axes[0])
     ratings = df[['1_STAR_RATINGS','2_STAR_RATINGS','3_STAR_RATINGS','4_STAR_RATINGS','5_STAR_RATINGS']]
@@ -128,6 +124,11 @@ elif condition == 'EDA':
     axes[1] = plt.pie(rating_count['Mean'], labels = rating_count['index'], autopct='%.0f%%', radius = 1.5)
     plt.title("Rating Distribution By Mean",pad=60, fontsize = 15)
     st.write(fig1)
+    
+    # chart 2
+    
+    
+    
     pass
 elif condition == "Model Prediction":
     pass
