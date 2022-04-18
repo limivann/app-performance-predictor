@@ -24,13 +24,29 @@ Group Members: Aaron, Ivan, Yifei
 ## Problem statement
 
 1. Machine learning main goal: predict rating of the app using features.
-2. Which country makes the best app
-3. Which genre of apps has the highest rating
-4. Does content rating, price(free / paid), ad supported apps has impact on the rating
-5. Does size of the app affect total installs? (some ppl dont like to install large apps)
+2. Which genre of apps has the highest rating?
+3. Which country makes the best apps?
 
-Feel free to add more problems...
+Dev
+- Best developers and their top categories.
+- Developers that made the most apps.
 
+Yifei
+- Does editor's choice affect ratings and installs?
+- Does size of the app and price(free / paid) affect total installs? (some people don't like to install large apps)
+- Does content rating, price(free / paid), ad supported apps, in app purchases and collections has impact on the rating?
+- Does Day since updated affect rating
+- Does day since released affect installs (find apps that has less installs despite released for a long time)
+- How to get "High" Rating on Play Store?
+
+Aaron
+- App rating distribution
+- Top singapore company apps?
+- Rating VS size/price/installs
+- Number of reviews VS Number of downloads
+- FANG, which company made the best apps?
+- How to price your app?
+- 
 ## Data preparation and cleaning
 
 Dataset link: [google-playstore-apps](https://www.kaggle.com/gauthamp10/google-playstore-apps)
@@ -41,10 +57,14 @@ Scrapper folder `./google-play-scrapper`
 
 ## Machine learning techniques
 
-Problem type: Numerical
+Initial Goal: Predicting the rating of the app (Numerical)
 
-Linear Regression?
+Linear Regression
+
+Actual Goal: Predicting the market size of the app (Categorical)
+
+Classification
 
 ## Presentation of data driven insights
 
-Tableau ftw
+Streamlit [link](https://limivann-app-rating-predictor.herokuapp.com/)
