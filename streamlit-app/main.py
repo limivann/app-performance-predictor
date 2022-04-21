@@ -1,4 +1,7 @@
-from numpy import size
+from re import M
+
+from sklearn.metrics import precision_recall_curve
+from st_aggrid import AgGrid
 import streamlit as st
 import pandas as pd
 from PIL import Image
@@ -83,12 +86,13 @@ def header(text):
 
 @st.cache(suppress_st_warning=True)
 def get_cleaned_data():
-    cleaned_data = pd.read_csv("../datasets/google_app_scrap_cleaned.csv")
+    cleaned_data = pd.read_csv("./data/google_app_scrap_cleaned.csv")
     return cleaned_data
 
-@st.cache(suppress_st_warning=True)
+@st.cache(suppress_st_warning=True, allow_output_mutation=True)
 def get_model():
     model = pickle.load(open('./model/model.pkl', 'rb'))
+    return model
 
 condition = st.sidebar.selectbox(
     "Select the visualization",
@@ -98,6 +102,12 @@ condition = st.sidebar.selectbox(
 #loading the data and model
 df = get_cleaned_data()
 model = get_model()
+
+# draw heatmap
+def draw_heatmap(heatmap):
+    fig, ax = plt.subplots()
+    hmap = sb.heatmap(heatmap, annot=True, fmt=".0f", ax=ax)
+    st.write(fig)
 
 # config css
 with open("./styles/styles.css") as f:
@@ -109,15 +119,19 @@ google_play_store_img = Image.open('./images/image_google_play-store.webp')
 #pages
 if condition == 'Introduction':
     st.image(google_play_store_img, caption='Windows 11 introduces support on Google Play')
-
+    st.write("""
+             In today's world, apps has been playing an important role in every one's daily life. 
+             From Ecommerce apps, to social media apps to entertainment mobile apps, it is nearly impossible for us to stay away from any apps in our life.
+             """)
+    st.write("In this project, we analyse the Android Market and try to predict if a newly lanuched app can reach 1 Million downloads after 1 year of its release date.")
+    st.text("")
+    st.text("")
+    st.text("")
+    st.markdown("<p style='font-size:12px;text-align:right;'>Contributors: Ivan, Aaron, Yifei</p>",unsafe_allow_html=True)
 elif condition == 'EDA':
-    st.write(
-    '''
-        # Exploratory Data Analysis
-        
-        This is the EDA on apps in the android market
-    ''')
-    title("Ratings",24,"black")
+    title("Model Evalation",30)
+    st.write("This is the EDA on apps in the android market")
+    header("Ratings")
     
     # chart 1
     fig1, axes =  plt.subplots(1, 2, figsize = (15, 5))
@@ -212,13 +226,90 @@ elif condition == "Model Prediction":
             ('Low', 'Medium', 'High', "More than 50 per day"))
     
     header("Model Prediction")
+    st.write("Input")
+    user_input_data = {"Game": game,
+                       "Ad Supported": ad_supported,
+                       "In App Purchases": in_app_purchases,
+                       "Free": free,
+                       "Price Band": price_band,
+                       "Size Band": size_band,
+                       "Content Rating": content_rating,
+                       "Update Period": update_period,
+                       "Review Rate": review_rate,
+                       "Rating Rate": rating_rate}
+    input_x = pd.DataFrame(data=user_input_data, index=[0])
+    st.table(input_x)
     if st.button('Predict data'):
         # data preprocessing
-        
-        st.write('Havent implemented')
+        X_test = {"CATEGORY_Game": 1 if game == "True" else 0,
+                  "CATEGORY_Non Game": 0 if game == "True" else 1,
+                  "CONTENT_RATING_Adults": 1 if content_rating == "Adults" else 0,
+                  "CONTENT_RATING_Teen": 1 if content_rating == "Teen" else 0,
+                  "CONTENT_RATING_Everyone": 1 if content_rating == "Everyone" else 0,
+                  "FREE": 1 if free == "True" else 0,
+                  "AD_SUPPORTED": 1 if ad_supported == "True" else 0,
+                  "IN_APP_PURCHASES": 1 if in_app_purchases == "True" else 0,
+                  "PRICEBAND": None,
+                  "SIZEBAND": None,
+                  "DAYS_SINCE_UPDATE_RANGE": None,
+                  "REVIEW_RATE": None,
+                  "RATING_RATE": None}
+        # label encoding
+        pb_mapping = {"Free": 0, "Cheap": 1, "Normal": 2, "Expensive": 3, "Very Expensive": 4}
+        sb_mapping = {"Very Small": 0, "Small": 1, "Medium": 2, "Large": 3, "Very Large": 4}
+        dsu_mapping = {"Within few days": 0, "Around a week": 1, "Within 1 month": 2, "1 to 3 months": 3, "3 to 6 months": 4, "More than 6 months": 5}
+        revr_mapping = {"Low": 0, "Medium": 1, "High": 2, "More than once per day": 3}
+        ratr_mapping = {"Low": 0, "Medium": 1, "High": 2, "More than 50 per day": 3}
+        X_test["PRICEBAND"] = pb_mapping[price_band]
+        X_test["SIZEBAND"] = sb_mapping[size_band]
+        X_test["DAYS_SINCE_UPDATE_RANGE"] = dsu_mapping[update_period]
+        X_test["REVIEW_RATE"] = revr_mapping[review_rate]
+        X_test["RATING_RATE"] = ratr_mapping[rating_rate]
+        input_x_test = pd.DataFrame(data=X_test, index=[0])
+        y_test = model.predict(input_x_test)
+        if (y_test == 1):
+            result = "After Launch Year: More than 1 Million Downloads :)"
+            st.balloons()
+            st.success(result)
+        else:
+            result = "After Launch Year: Less than 1 Million Downloads :("
+            st.error(result)
     else:
         pass
     
-    
 elif condition == "Model Evaluation":
-    pass
+    title("Model Evaluation",30)
+    header("Model Parameters: ")
+    st.write("RandomForestClassifier(max_depth=12, max_features='sqrt', n_estimators=600)")
+    col1, col2 = st.columns(2)
+    train_matrix = [[1491, 181], [54, 1618]]
+    test_matrix = [[424, 96], [46, 180]]
+    with col1:
+        draw_heatmap(train_matrix)
+    with col2:
+        draw_heatmap(test_matrix)
+    
+    col1_score, col2_score = st.columns(2)
+    with col1_score:
+        tn, fp, fn, tp = train_matrix[0][0], train_matrix[0][1], train_matrix[1][0], train_matrix[1][1]
+        header("Train data")
+        accuracy = (tn + tp)/ (tn+tp+fp+fn)
+        precision = (tp)/ (tp + fp)
+        recall = (tp / (tp + fn))
+        f1_score = 2* (precision* recall)/(precision + recall)
+        st.write("Accuracy: {:.1f}%".format(accuracy * 100))
+        st.write("Precision: {:.1f}%".format(precision * 100))
+        st.write("Recall: {:.1f}%".format(recall * 100))
+        st.write("F1-score: {:.1f}%".format(f1_score * 100))  
+    with col2_score:
+        tn, fp, fn, tp = test_matrix[0][0], test_matrix[0][1], test_matrix[1][0], test_matrix[1][1]
+        header("Test data")
+        accuracy = (tn + tp)/ (tn+tp+fp+fn)
+        precision = (tp)/ (tp + fp)
+        recall = (tp / (tp + fn))
+        f1_score = 2* (precision* recall)/(precision + recall)
+        st.write("Accuracy: {:.1f}%".format(accuracy * 100))
+        st.write("Precision: {:.1f}%".format(precision * 100))
+        st.write("Recall: {:.1f}%".format(recall * 100))
+        st.write("F1-score: {:.1f}%".format(f1_score * 100))    
+    
