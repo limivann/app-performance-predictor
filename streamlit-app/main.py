@@ -1,6 +1,5 @@
 from re import M
 
-from sklearn.metrics import precision_recall_curve
 from st_aggrid import AgGrid
 import streamlit as st
 import pandas as pd
@@ -10,6 +9,7 @@ import matplotlib.pyplot as plt
 import seaborn as sb
 sb.set_theme(style="white", palette=None)
 import pickle
+from dython import nominal
 
 #https://medium.com/mlearning-ai/explore-make-predictions-and-evaluate-your-ml-models-with-streamlit-and-pipelines-b6c3efeb92ff
 
@@ -86,8 +86,8 @@ def header(text):
 
 @st.cache(suppress_st_warning=True)
 def get_cleaned_data():
-    cleaned_data = pd.read_csv("./data/google_app_scrap_cleaned.csv")
-    return cleaned_data
+    cleaned_data = pd.read_csv("./data/streamlit_eda.csv")
+    return cleaned_data[["APP_NAME", 'RATING', 'INSTALLS_GROUP', 'MAX_INSTALLS', 'RATING_RATE', 'CATEGORY', 'REVIEW_RATE', 'FREE', 'PRICEBAND', 'PRICE', 'SIZEBAND', 'SIZE', 'CONTENT_RATING', 'AD_SUPPORTED', 'COUNTRY', 'IN_APP_PURCHASES', 'EDITORS_CHOICE', 'DAYS_SINCE_UPDATE_RANGE', 'DAYS_SINCE_RELEASED_RANGE']]
 
 @st.cache(suppress_st_warning=True, allow_output_mutation=True)
 def get_model():
@@ -104,15 +104,21 @@ df = get_cleaned_data()
 model = get_model()
 
 # draw heatmap
-def draw_heatmap(heatmap):
+def draw_heatmap(heatmap, format=".0f"):
     fig, ax = plt.subplots()
-    hmap = sb.heatmap(heatmap, annot=True, fmt=".0f", ax=ax)
+    hmap = sb.heatmap(heatmap, annot=True, fmt=format, ax=ax)
+    st.write(fig)
+    
+def draw_heatmap_corr(heatmap, format=".0f"):
+    fig, ax = plt.subplots()
+    hmap = sb.heatmap(heatmap, annot=True, fmt=format, ax=ax, annot_kws={"size":7} ,cbar=False)
+    plt.xticks(fontsize=6)
+    plt.yticks(fontsize=6)
     st.write(fig)
 
 # config css
 with open("./styles/styles.css") as f:
     st.markdown(f'<head><style>{f.read()}</style><head>',unsafe_allow_html=True)
-
 
 google_play_store_img = Image.open('./images/image_google_play-store.webp')
 
@@ -129,23 +135,28 @@ if condition == 'Introduction':
     st.text("")
     st.markdown("<p style='font-size:12px;text-align:right;'>Contributors: Ivan, Aaron, Yifei</p>",unsafe_allow_html=True)
 elif condition == 'EDA':
-    title("Model Evalation",30)
+    title("Exploratory Data Analysis",30)
     st.write("This is the EDA on apps in the android market")
-    header("Ratings")
-    
+    header("Scraped data (after cleaning)")
+    AgGrid(df)
     # chart 1
-    fig1, axes =  plt.subplots(1, 2, figsize = (15, 5))
-    f = sb.histplot(df, x = "RATING", ax = axes[0])
-    ratings = df[['1_STAR_RATINGS','2_STAR_RATINGS','3_STAR_RATINGS','4_STAR_RATINGS','5_STAR_RATINGS']]
-    rating_count = pd.DataFrame(ratings.mean(axis=0))
-    rating_count.columns = ['Mean']
-    rating_count.reset_index(inplace=True)
+    header("Heatmap corelation between selected features")
+    jointDf = df[['RATING', 'INSTALLS_GROUP', 'RATING_RATE', 'CATEGORY', 'REVIEW_RATE', 'FREE', 'PRICEBAND', 'SIZEBAND', 'CONTENT_RATING', 'AD_SUPPORTED', 'IN_APP_PURCHASES', 'EDITORS_CHOICE', 'DAYS_SINCE_UPDATE_RANGE']]
+    corr = nominal.associations(jointDf);
+    draw_heatmap_corr(corr["corr"], format=".2f")
     
-    axes[1] = plt.pie(rating_count['Mean'], labels = rating_count['index'], autopct='%.0f%%', radius = 1.5)
-    plt.title("Rating Distribution By Mean",pad=60, fontsize = 15)
-    st.write(fig1)
-    
+    title("Installs group EDA",28)
     # chart 2
+    col_chart1, col_chart2 = st.columns(2)
+    with col_chart1:
+        label = df['INSTALLS_GROUP'].value_counts().index.tolist()
+        fig2, ax = plt.subplots(figsize = (10, 10))
+        plt.pie(x = df['INSTALLS_GROUP'].value_counts().to_frame().INSTALLS_GROUP, labels = label)
+        my_circle=plt.Circle((0,0), 0.7, color='white')
+        p=plt.gcf()
+        p.gca().add_artist(my_circle)
+        plt.title("Distribution of Installs Group", size =20)
+        st.write(fig2)
     pass
 elif condition == "Model Prediction":
     title("App performance predictor",30)
@@ -280,10 +291,10 @@ elif condition == "Model Prediction":
 elif condition == "Model Evaluation":
     title("Model Evaluation",30)
     header("Model Parameters: ")
-    st.write("RandomForestClassifier(max_depth=12, max_features='sqrt', n_estimators=600)")
+    st.write("Decision Tree, Max Depth = 6")
     col1, col2 = st.columns(2)
-    train_matrix = [[1491, 181], [54, 1618]]
-    test_matrix = [[424, 96], [46, 180]]
+    train_matrix = [[1422, 149], [153, 511]]
+    test_matrix = [[462, 58], [60, 166]]
     with col1:
         draw_heatmap(train_matrix)
     with col2:
