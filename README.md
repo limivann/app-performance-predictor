@@ -1,70 +1,47 @@
-# app-rating-predictor
+# App Performance Predictor
 
-SC1015 Data Science Project
-Group Members: Aaron, Ivan, Yifei
+Predicting an app performance using Data Science.
 
-# Project Plan
+## About The Project
 
-## Marking Rubrics
+This is the mini project for SC1015 (Intro to Data Science and AI) which focuses on android market analysis and app perfomance predictor. For the entire walktrhough of the project, please view the notebooks in this order:
 
-1. 10% for coming up with your own problem definition based on a dataset
+1. [Data Cleaning](https://github.com/limivann/app-rating-predictor/blob/main/data_cleaning.ipynb)
+2. [Exploratory Data Analysis and Visualization](https://github.com/limivann/app-rating-predictor/blob/main/EDA.ipynb)
+3. [Model Building](https://github.com/limivann/app-rating-predictor/blob/main/model_building.ipynb)
+4. [Machine Learning](https://github.com/limivann/app-rating-predictor/blob/main/machine_learning.ipynb)
 
-2. 10% for data preparation and cleaning to suit the problem of your choice
+## Problem Defination
 
-3. 20% for exploratory data analysis/visualization to gather relevant insights
+Would an app exceed one million installs in a year after it is released?
 
-4. 20% for the use of machine learning techniques to solve specific problem
+## Models Used
 
-5. 20% for the presentation of data-driven insights and the recommendations
+1. Decision Trees
+2. Random Forest Classifier
 
-6. 10% for the quality of your final team presentation and overall impressions
+## Project Folder Structure
 
-7. 10% for learning something new and doing something beyond this course
+> Folder structure of our project
 
-## Problem statement
+```terminal
+.
+├── datasets                          # csv files
+├── google-play-scrapper              # web scraper for data preparation
+├── streamlit-app                     # website for model simulation
+├── data_cleaning.ipynb               # notebook for data cleaning
+├── EDA.ipynb                         # notebook for eda
+├── machine_learning.ipynb            # notebook for machine learning
+├── model_building.ipynb              # notebook for model building
+└── README.md
+```
 
-1. Machine learning main goal: predict rating of the app using features.
-2. Which genre of apps has the highest rating?
-3. Which country makes the best apps?
+## Streamlit Web App
 
-Dev
-- Best developers and their top categories.
-- Developers that made the most apps.
+For model simulation and visualization purposes, we have created a web app for this project. The link to the website is [here](https://app-performance-predictor.herokuapp.com/).
 
-Yifei
-- Does editor's choice affect ratings and installs?
-- Does size of the app and price(free / paid) affect total installs? (some people don't like to install large apps)
-- Does content rating, price(free / paid), ad supported apps, in app purchases and collections has impact on the rating?
-- Does Day since updated affect rating
-- Does day since released affect installs (find apps that has less installs despite released for a long time)
-- How to get "High" Rating on Play Store?
+## Contributors
 
-Aaron
-- App rating distribution
-- Top singapore company apps?
-- Rating VS size/price/installs
-- Number of reviews VS Number of downloads
-- FANG, which company made the best apps?
-- How to price your app?
-- 
-## Data preparation and cleaning
-
-Dataset link: [google-playstore-apps](https://www.kaggle.com/gauthamp10/google-playstore-apps)
-
-Scrapper folder `./google-play-scrapper`
-
-## Exploration data analysis
-
-## Machine learning techniques
-
-Initial Goal: Predicting the rating of the app (Numerical)
-
-Linear Regression
-
-Actual Goal: Predicting the market size of the app (Categorical)
-
-Classification
-
-## Presentation of data driven insights
-
-Streamlit [link](https://limivann-app-rating-predictor.herokuapp.com/)
+- @limivann - Web Scraper, Model Building, Machine Learning
+- @lordAaron0121 - Data Cleaning, EDA and visualization
+- @serphyshio - Data Cleaning, EDA and visualization

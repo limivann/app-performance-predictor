@@ -130,6 +130,7 @@ if condition == 'Introduction':
              From Ecommerce apps, to social media apps to entertainment mobile apps, it is nearly impossible for us to stay away from any apps in our life.
              """)
     st.write("In this project, we analyse the Android Market and try to predict if a newly lanuched app can reach 1 Million downloads after 1 year of its release date.")
+    st.markdown("[Project Link](https://app-performance-predictor.herokuapp.com/)")
     st.text("")
     st.text("")
     st.text("")
