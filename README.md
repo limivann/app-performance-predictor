@@ -52,6 +52,7 @@ For model simulation and visualization purposes, we have created a web app for t
 - https://www.npmjs.com/package/google-play-scraper
 - https://developers.google.com/maps/documentation/places/web-service/overview
 - http://shakedzy.xyz/dython/
+- https://seaborn.pydata.org/api.html
 - https://plotly.com/python/plotly-express/
 - https://machinelearningmastery.com/smote-oversampling-for-imbalanced-classification/
 - https://www.kaggle.com/code/sociopath00/random-forest-using-gridsearchcv/notebook
