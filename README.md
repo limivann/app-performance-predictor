@@ -33,6 +33,7 @@ Would an app exceed one million installs in a year after it is released?
 ├── EDA.ipynb                         # notebook for eda
 ├── machine_learning.ipynb            # notebook for machine learning
 ├── model_building.ipynb              # notebook for model building
+├── DSF2_Group 7 ppt.pptx             # ppt for presentation
 └── README.md
 ```
 
