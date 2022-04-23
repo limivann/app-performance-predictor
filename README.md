@@ -45,3 +45,13 @@ For model simulation and visualization purposes, we have created a web app for t
 - @limivann - Web Scraper, Model Building, Machine Learning
 - @lordAaron0121 - Data Cleaning, EDA and visualization
 - @serphyshio - Data Cleaning, EDA and visualization
+
+## References
+
+- https://buildfire.com/app-statistics/
+- https://www.npmjs.com/package/google-play-scraper
+- https://developers.google.com/maps/documentation/places/web-service/overview
+- http://shakedzy.xyz/dython/
+- https://machinelearningmastery.com/smote-oversampling-for-imbalanced-classification/
+- https://www.kaggle.com/code/sociopath00/random-forest-using-gridsearchcv/notebook
+- https://towardsdatascience.com/accuracy-precision-recall-or-f1-331fb37c5cb9
