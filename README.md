@@ -11,7 +11,7 @@ This is the mini project for SC1015 (Intro to Data Science and AI) which focuses
 3. [Model Building](https://github.com/limivann/app-rating-predictor/blob/main/model_building.ipynb)
 4. [Machine Learning](https://github.com/limivann/app-rating-predictor/blob/main/machine_learning.ipynb)
 
-## Problem Defination
+## Problem Definition
 
 Would an app exceed one million installs in a year after it is released?
 
