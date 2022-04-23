@@ -2,6 +2,7 @@ from re import M
 
 from st_aggrid import AgGrid
 import streamlit as st
+import streamlit.components.v1 as components
 import pandas as pd
 from PIL import Image
 import plotly.express as px
@@ -9,9 +10,23 @@ import matplotlib.pyplot as plt
 import seaborn as sb
 sb.set_theme(style="white", palette=None)
 import pickle
-from dython import nominal
 
 #https://medium.com/mlearning-ai/explore-make-predictions-and-evaluate-your-ml-models-with-streamlit-and-pipelines-b6c3efeb92ff
+
+st.markdown(
+        f"""
+<style>
+    .appview-container .main .block-container{{
+        min-width: 60%;
+        padding-top: 1rem;
+        padding-right: 1rem;
+        padding-left: 1rem;
+        padding-bottom: 1rem;
+    }}
+</style>
+""",
+        unsafe_allow_html=True,
+    )
 
 class plot_type:
     def __init__(self,data):
@@ -79,7 +94,6 @@ class select_box:
 def title(text,size):
     st.markdown(f'<h1 style="font-weight:bolder;font-size:{size}px;text-align:left;">{text}</h1>',unsafe_allow_html=True)
 
-
 def header(text):
     st.markdown(f"<p style='font-weight:bolder;font-size:20px'>{text}</p>",unsafe_allow_html=True)
 
@@ -87,7 +101,7 @@ def header(text):
 @st.cache(suppress_st_warning=True)
 def get_cleaned_data():
     cleaned_data = pd.read_csv("./data/streamlit_eda.csv")
-    return cleaned_data[["APP_NAME", 'RATING', 'INSTALLS_GROUP', 'MAX_INSTALLS', 'RATING_RATE', 'CATEGORY', 'REVIEW_RATE', 'FREE', 'PRICEBAND', 'PRICE', 'SIZEBAND', 'SIZE', 'CONTENT_RATING', 'AD_SUPPORTED', 'COUNTRY', 'IN_APP_PURCHASES', 'EDITORS_CHOICE', 'DAYS_SINCE_UPDATE_RANGE', 'DAYS_SINCE_RELEASED_RANGE']]
+    return cleaned_data[['RATING', 'INSTALLS_GROUP', 'RATING_RATE', 'CATEGORY', 'REVIEW_RATE', 'FREE', 'PRICEBAND', 'SIZEBAND', 'CONTENT_RATING', 'AD_SUPPORTED', 'COUNTRY', 'IN_APP_PURCHASES', 'EDITORS_CHOICE', 'DAYS_SINCE_UPDATE_RANGE', 'DAYS_SINCE_RELEASED_RANGE']]
 
 @st.cache(suppress_st_warning=True, allow_output_mutation=True)
 def get_model():
@@ -97,7 +111,21 @@ def get_model():
 condition = st.sidebar.selectbox(
     "Select the visualization",
     ("Introduction", "EDA", "Model Prediction", "Model Evaluation")
-)
+) 
+if condition == "Introduction" or condition =="Model Prediction" or condition == "Model Evaluation":
+    st.markdown(
+        f"""
+        <style>
+            .appview-container .main .block-container{{
+                min-width: 50%;
+                padding-top: 1rem;
+                padding-right: 1rem;
+                padding-left: 1rem;
+                padding-bottom: 1rem;
+            }}
+        </style>
+        """,unsafe_allow_html=True,
+    )
 
 #loading the data and model
 df = get_cleaned_data()
@@ -116,11 +144,24 @@ def draw_heatmap_corr(heatmap, format=".0f"):
     plt.yticks(fontsize=6)
     st.write(fig)
 
-# config css
-with open("./styles/styles.css") as f:
-    st.markdown(f'<head><style>{f.read()}</style><head>',unsafe_allow_html=True)
-
+# get images
 google_play_store_img = Image.open('./images/image_google_play-store.webp')
+heatmap_img = Image.open('./figures/heatmap_all.png')
+treemap_html = open("./figures/treemap_all.html", 'r', encoding='utf-8').read()
+dist_installs_img = Image.open("./figures/distribution_installs.png")
+installs_grp_rating_img = Image.open("./figures/installs_group_rating.png")
+installs_grp_ec_img = Image.open("./figures/installs_group_editors_choice.png")
+installs_grp_free_img = Image.open("./figures/installs_group_free.png")
+installs_grp_ads_img = Image.open("./figures/installs_group_ad_supported.png")
+installs_grp_iap_img = Image.open("./figures/installs_group_iap.png")
+installs_grp_cr_img = Image.open("./figures/installs_group_cr.png")
+installs_grp_dsu_html = open("./figures/installs_group_dsu.html", 'r', encoding='utf-8').read()
+installs_grp_dsu_img = Image.open("./figures/installs_group_dsu.png")
+installs_grp_rc_html = open("./figures/installs_group_review_count.html", 'r', encoding='utf-8').read()
+installs_grp_rr_img = Image.open("./figures/installs_group_rr.png")
+installs_grp_size_html = open("./figures/installs_group_size.html", 'r', encoding='utf-8').read()
+installs_grp_cat_html = open("./figures/installs_group_category.html", 'r', encoding='utf-8').read()
+installs_grp_cat_free_img = Image.open("./figures/installs_group_cat_free.png")
 
 #pages
 if condition == 'Introduction':
@@ -130,35 +171,146 @@ if condition == 'Introduction':
              From Ecommerce apps, to social media apps to entertainment mobile apps, it is nearly impossible for us to stay away from any apps in our life.
              """)
     st.write("In this project, we analyse the Android Market and try to predict if a newly lanuched app can reach 1 Million downloads after 1 year of its release date.")
-    st.markdown("[Project Link](https://app-performance-predictor.herokuapp.com/)")
+    st.markdown("[Project Link](https://github.com/limivann/app-performance-predictor)")
     st.text("")
     st.text("")
     st.text("")
     st.markdown("<p style='font-size:12px;text-align:right;'>Contributors: Ivan, Aaron, Yifei</p>",unsafe_allow_html=True)
 elif condition == 'EDA':
+    st.sidebar.write("Close this sidebar for full experience")
     title("Exploratory Data Analysis",30)
-    st.write("This is the EDA on apps in the android market")
-    header("Scraped data (after cleaning)")
+    st.write("This is the EDA on apps in google play store")
+    header("Sample data after cleaning (100 apps)")
     AgGrid(df)
+    title("Basic EDA",28)
     # chart 1
     header("Heatmap corelation between selected features")
-    jointDf = df[['RATING', 'INSTALLS_GROUP', 'RATING_RATE', 'CATEGORY', 'REVIEW_RATE', 'FREE', 'PRICEBAND', 'SIZEBAND', 'CONTENT_RATING', 'AD_SUPPORTED', 'IN_APP_PURCHASES', 'EDITORS_CHOICE', 'DAYS_SINCE_UPDATE_RANGE']]
-    corr = nominal.associations(jointDf);
-    draw_heatmap_corr(corr["corr"], format=".2f")
+    st.image(heatmap_img)
     
-    title("Installs group EDA",28)
     # chart 2
-    col_chart1, col_chart2 = st.columns(2)
-    with col_chart1:
-        label = df['INSTALLS_GROUP'].value_counts().index.tolist()
-        fig2, ax = plt.subplots(figsize = (10, 10))
-        plt.pie(x = df['INSTALLS_GROUP'].value_counts().to_frame().INSTALLS_GROUP, labels = label)
-        my_circle=plt.Circle((0,0), 0.7, color='white')
-        p=plt.gcf()
-        p.gca().add_artist(my_circle)
-        plt.title("Distribution of Installs Group", size =20)
-        st.write(fig2)
-    pass
+    header("Tree map")
+    components.html(treemap_html, height=450)
+    
+    # chart 3
+    title("Installs group EDA",28)
+    header("Distribution of installs group")
+    chart3_col1, chart3_col2, chart3_col3 = st.columns([1,2,1])
+    with chart3_col2:
+        st.image(dist_installs_img, use_column_width="always")
+    st.markdown("<p style='text-align:center'>Almost half the number of apps have installs between 100,000 and 10,000,000.</p>", unsafe_allow_html=True)
+        
+    # chart 4
+    header("Installs group vs ratings")
+    chart4_col1, chart4_col2, chart4_col3 = st.columns([1,2,1])
+    with chart4_col2:
+        st.image(installs_grp_rating_img, use_column_width="always")
+    st.markdown("<p style='text-align:center'>Paid apps with more than 10M of installs are most likely to be rated higher and it's less spread out in the y-axis.</p>", unsafe_allow_html=True)
+
+    # chart 5
+    header("Installs group vs editors choice")
+    chart5_col1, chart5_col2, chart5_col3, chart5_col4 = st.columns([1,4,2,1])
+    with chart5_col2:
+        st.image(installs_grp_ec_img, use_column_width="always")
+    with chart5_col3:
+        st.markdown("<p style='font-size:14px;padding-top:40%;font-weight:bold'>Percentage of apps that are awarded Editors's Choice in each install group:</p>", unsafe_allow_html=True)
+        st.markdown("<p style='font-size:14px;'>Between 100K and 10M : 1.02 %</p>", unsafe_allow_html=True)
+        st.markdown("<p style='font-size:14px;'>Less than 100K : 0.10 %</p>", unsafe_allow_html=True)
+        st.markdown("<p style='font-size:14px;'>More than 10M : 4.93 %</p>", unsafe_allow_html=True)
+    st.markdown("<p style='text-align:center'>Most of the app are not awarded with 'Editor's Choice'. But there's a slight increase in the likeliness of an app being an 'Editor's Choice' app if they have more installs.</p>", unsafe_allow_html=True)
+
+    # chart 6
+    header("Installs group vs free")
+    chart6_col1, chart6_col2, chart6_col3, chart6_col4 = st.columns([1,4,2,1])
+    with chart6_col2:
+        st.image(installs_grp_free_img, use_column_width="always")
+    with chart6_col3:
+        st.markdown("<p style='font-size:14px;padding-top:40%;font-weight:bold'>Percentage of apps that are free in each install group:</p>", unsafe_allow_html=True)
+        st.markdown("<p style='font-size:14px;'>Between 100K and 10M : 91.76 %</p>", unsafe_allow_html=True)
+        st.markdown("<p style='font-size:14px;'>Less than 100K : 44.08 %</p>", unsafe_allow_html=True)
+        st.markdown("<p style='font-size:14px;'>More than 10M : 99.91 %</p>", unsafe_allow_html=True)
+    st.markdown("<p style='text-align:center'>Apps that has more than 100K of installs are more likely to be free. Apps that has less installs are less likely to be free because the majority of players don't play paid games. If an app is paid, it's more likely to have less than 100K of installs.</p>", unsafe_allow_html=True)
+
+    # chart 7
+    header("Installs group vs ad supported")
+    chart7_col1, chart7_col2, chart7_col3, chart7_col4 = st.columns([1,4,2,1])
+    with chart7_col2:
+        st.image(installs_grp_ads_img, use_column_width="always")
+    with chart7_col3:
+        st.markdown("<p style='font-size:14px;padding-top:40%;font-weight:bold'>Percentage of apps that have advertisement in each install group:</p>", unsafe_allow_html=True)
+        st.markdown("<p style='font-size:14px;'>Between 100K and 10M : 55.23 %</p>", unsafe_allow_html=True)
+        st.markdown("<p style='font-size:14px;'>Less than 100K : 20.53 %</p>", unsafe_allow_html=True)
+        st.markdown("<p style='font-size:14px;'>More than 10M : 76.58 %</p>", unsafe_allow_html=True)
+    st.markdown("<p style='text-align:center'>Apps that has more than 100K of installs are more likely to be ad-supported as the developer company might need a source of income to maintain the company and game. </p>", unsafe_allow_html=True)
+
+    # chart 8
+    header("Installs group vs in app purchases")
+    chart8_col1, chart8_col2, chart8_col3, chart8_col4 = st.columns([1,4,2,1])
+    with chart8_col2:
+        st.image(installs_grp_iap_img, use_column_width="always")
+    with chart8_col3:
+        st.markdown("<p style='font-size:14px;padding-top:40%;font-weight:bold'>Percentage of apps that have in app purchases in each install group:</p>", unsafe_allow_html=True)
+        st.markdown("<p style='font-size:14px;'>Between 100K and 10M : 63.11 %</p>", unsafe_allow_html=True)
+        st.markdown("<p style='font-size:14px;'>Less than 100K : 36.37 %</p>", unsafe_allow_html=True)
+        st.markdown("<p style='font-size:14px;'>More than 10M : 76.56 %</p>", unsafe_allow_html=True)
+    st.markdown("<p style='text-align:center'>It's quite common to have in-app purchases for games that are popular. Apps with higher traction (more installs) will plan to make profit through in app purchases. </p>", unsafe_allow_html=True)
+
+
+    # chart 9
+    header("Installs group vs content rating")
+    chart9_col1, chart9_col2, chart9_col3 = st.columns([1,2,1])
+    with chart9_col2:
+        st.image(installs_grp_cr_img, use_column_width="always")
+    st.markdown("<p style='text-align:center'>Most of the app in this dataset are for everyone. And 'Adults' apps are significantly low in all install groups, especially for apps more than 10M of installs.</p>", unsafe_allow_html=True)
+
+    # chart 10
+    header("Installs group vs days since update")
+    chart10_col1, chart10_col2, chart10_col3 = st.columns([1,6,1])
+    with chart10_col2:
+        components.html(installs_grp_dsu_html, height=500)
+    st.markdown("<p style='text-align:center'>Most of the apps are updated more than 6 months ago or within 1 month. This are the polar opposites, which means good apps are more likely to be updated 1-3 months. But poor apps are not that frequently updated.</p>", unsafe_allow_html=True)
+
+    # chart 11
+    chart11_col1, chart11_col2, chart11_col3 = st.columns([1,2,1])
+    with chart11_col2:
+        st.image(installs_grp_dsu_img, use_column_width="always")
+    st.markdown("<p style='text-align:center'>Apps with less than 100K of installs typically are less updated. As the last update is like more than 6 months ago. For apps with more than 100K installs, it's more frequently updated. Especially for apps more than 10M of installs, they are updated few days ago, or at most within 1 month ago.</p>", unsafe_allow_html=True)
+
+    # chart 12
+    header("Installs group vs review count")
+    chart12_col1, chart12_col2, chart12_col3 = st.columns([1,20,1])
+    with chart12_col2:
+        components.html(installs_grp_rc_html, height=800)
+    st.markdown("<p style='text-align:center'>There's a significant increase in installs as the apps get more review count. For apps with more than 10M installs have extreme amount of review count. But the distribution is quite even compared to the other 2 groups because the majority of the apps with 10M installs are dispersed in 1000 to 4000 reviews. This is considered a wide gap compared to apps with less than 100K installs.</p>", unsafe_allow_html=True)
+
+    # chart 13
+    header("Installs group vs rating rate")
+    chart13_col1, chart13_col2, chart13_col3 = st.columns([1,2,1])
+    with chart13_col2:
+        st.image(installs_grp_rr_img, use_column_width="always")
+    st.markdown("<p style='text-align:center'>Apps with less then 100K installs have low rating counts as well as low rating rates. As the installation count increases, the rating rate is increasing as well. (High rating rate means less than 50 and more than 10)</p>", unsafe_allow_html=True)
+
+    # chart 14
+    header("Installs group vs rating rate")
+    chart14_col1, chart14_col2, chart14_col3 = st.columns([1,20,1])
+    with chart14_col2:
+        components.html(installs_grp_size_html, height=800)
+    st.markdown("<p style='text-align:center'>Before removing outliers, the figure squeezed on the left side (positively skewed). After removing outliers, we can observe the size distribution better.</p>", unsafe_allow_html=True)
+
+    # chart 15
+    header("Installs group vs category")
+    components.html(installs_grp_cat_html, height=600)
+    st.markdown("<p style='text-align:center'>Game is highly saturated in this dataset.</p>", unsafe_allow_html=True)
+    
+    # chart 16
+    chart16_col1, chart16_col2, chart16_col3 = st.columns([1,10,1])
+    with chart16_col2:
+        st.image(installs_grp_cat_free_img, use_column_width="always")
+        
+    st.text("")
+    st.text("")
+    st.markdown("<span style='font-weight:bold'>For more visualizations and eda, please refer to our project repo - </span>[link](https://github.com/limivann/app-performance-predictor)", unsafe_allow_html=True)
+
+    
 elif condition == "Model Prediction":
     title("App performance predictor",30)
     st.write("This app predicts if the app will reach 1 Million Downloads in its launch year (first year since app release)")
