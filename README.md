@@ -54,7 +54,7 @@ For model simulation and visualization purposes, we have created a web app for t
 
 ## Conclusion
 
-1. Oversampling the data did not improve model performance due to overfitting.
+1. Oversampling the data did not improve the models’ performance on the test data because of overfitting.
 2. We are able to achieve over 80% accuracy in predicting if an app would exceed one million installs in a year.
 3. Strategies to increase the number of installs of an app may include:
    - Making the app free of charge
