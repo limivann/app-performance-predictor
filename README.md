@@ -54,12 +54,12 @@ For model simulation and visualization purposes, we have created a web app for t
 
 ## Conclusion
 
-1. Oversampling the data did not improved model performance due to overfitting.
+1. Oversampling the data did not improve model performance due to overfitting.
 2. We are able to achieve over 80% accuracy in predicting if an app would exceed one million installs in a year.
 3. Strategies to increase the number of installs of an app may include:
    - Making the app free of charge
    - Increase the rating count of the app
-   - Increase the review count if the app
+   - Increase the review count of the app
 4. The number of installs of an app does not depends entirely on its feature. It might depend on qualitative features such as reviews. Hence one thing that we could improve upon is to do sentimental analysis on the reviews using NLP.
 
 ## Contributors
