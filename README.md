@@ -38,7 +38,7 @@ This is the mini project for SC1015 (Intro to Data Science and AI) which focuses
 1. Decision Trees
 2. Random Forest Classifier
 
-## Takeways from EDA
+## Key takeways from our primary EDA
 
 1. More than half of the apps have 100K-100M installs.
 2. The average rating of an app is 4.16
