@@ -38,9 +38,29 @@ This is the mini project for SC1015 (Intro to Data Science and AI) which focuses
 1. Decision Trees
 2. Random Forest Classifier
 
+## Takeways from EDA
+
+1. More than half of the apps have 100K-100M installs.
+2. The average rating of an app is 4.16
+3. Apps with more than 10M installs have a higher chance to be chosen as Editor's Choice.
+4. 99% of apps with more than 10M installs are free.
+5. 77% of apps with more than 10M installs are ad-supported and has in-app purchases.
+6. Apps with more than 10M installs are frequently updated, at most within a month.
+7. Size has a strong linear relationship with install count.
+
 ## Streamlit Web App
 
 For model simulation and visualization purposes, we have created a web app for this project. The link to the website is [here](https://app-performance-predictor.herokuapp.com/).
+
+## Conclusion
+
+1. Oversampling the data did not improved model performance due to overfitting.
+2. We are able to achieve over 80% accuracy in predicting if an app would exceed one million installs in a year.
+3. Strategies to increase the number of installs of an app may include:
+   - Making the app free of charge
+   - Increase the rating count of the app
+   - Increase the review count if the app
+4. The number of installs of an app does not depends entirely on its feature. It might depend on qualitative features such as reviews. Hence one thing that we could improve upon is to do sentimental analysis on the reviews using NLP.
 
 ## Contributors
 
