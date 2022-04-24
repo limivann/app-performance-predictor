@@ -4,7 +4,7 @@ Predicting an app performance using Data Science.
 
 ## About The Project
 
-This is the mini project for SC1015 (Intro to Data Science and AI) which focuses on android market analysis and app perfomance predictor. For the entire walktrhough of the project, please view the notebooks in this order:
+This is the mini project for SC1015 (Intro to Data Science and AI) which focuses on android market analysis and app perfomance predictor. For the entire walkthrough of the project, please view the notebooks in this order:
 
 1. [Data Cleaning](https://github.com/limivann/app-rating-predictor/blob/main/data_cleaning.ipynb)
 2. [Exploratory Data Analysis and Visualization](https://github.com/limivann/app-rating-predictor/blob/main/EDA.ipynb)
