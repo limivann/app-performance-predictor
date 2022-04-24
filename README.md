@@ -11,15 +11,6 @@ This is the mini project for SC1015 (Intro to Data Science and AI) which focuses
 3. [Model Building](https://github.com/limivann/app-rating-predictor/blob/main/model_building.ipynb)
 4. [Machine Learning](https://github.com/limivann/app-rating-predictor/blob/main/machine_learning.ipynb)
 
-## Problem Definition
-
-Would an app exceed one million installs in a year after it is released?
-
-## Models Used
-
-1. Decision Trees
-2. Random Forest Classifier
-
 ## Project Folder Structure
 
 > Folder structure of our project
@@ -28,14 +19,24 @@ Would an app exceed one million installs in a year after it is released?
 .
 ├── datasets                          # csv files
 ├── google-play-scrapper              # web scraper for data preparation
+├── presentation                      # presentation ppt
 ├── streamlit-app                     # website for model simulation
 ├── data_cleaning.ipynb               # notebook for data cleaning
 ├── EDA.ipynb                         # notebook for eda
 ├── machine_learning.ipynb            # notebook for machine learning
 ├── model_building.ipynb              # notebook for model building
-├── DSF2_Group 7 ppt.pptx             # ppt for presentation
 └── README.md
 ```
+
+## Problem Definition
+
+- How different features of an app affect its popularity?
+- Would an app exceed one million installs in a year after its release?
+
+## Models Used
+
+1. Decision Trees
+2. Random Forest Classifier
 
 ## Streamlit Web App
 
@@ -43,7 +44,7 @@ For model simulation and visualization purposes, we have created a web app for t
 
 ## Contributors
 
-- @limivann - Web Scraper, Model Building, Machine Learning
+- @limivann - Web Scraper, Model Building / Machine Learning, Streamlit Web App
 - @lordAaron0121 - Data Cleaning, EDA and visualization
 - @serphyshio - Data Cleaning, EDA and visualization
 
