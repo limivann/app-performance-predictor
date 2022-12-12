@@ -51,7 +51,7 @@ This is the mini project for SC1015 (Intro to Data Science and AI) which focuses
 
 ## Streamlit Web App
 
-For model simulation and visualization purposes, we have created a web app for this project. The link to the website is [here](https://app-performance-predictor.herokuapp.com/).
+For model simulation and visualization purposes, we have created a web app for this project. The link to the website is [here](https://performance-predictor.streamlit.app/).
 
 ## Conclusion
 
