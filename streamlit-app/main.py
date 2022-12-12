@@ -1,5 +1,5 @@
 from re import M
-
+from pathlib import Path
 from st_aggrid import AgGrid
 import streamlit as st
 import streamlit.components.v1 as components
@@ -100,7 +100,8 @@ def header(text):
 
 @st.cache(suppress_st_warning=True)
 def get_cleaned_data():
-    cleaned_data = pd.read_csv("./data/streamlit_eda.csv")
+    data_path = Path(__file__).parents[1] / 'streamlit-app/data/streamlit_eda.csv'
+    cleaned_data = pd.read_csv(data_path)
     return cleaned_data[['RATING', 'INSTALLS_GROUP', 'RATING_RATE', 'CATEGORY', 'REVIEW_RATE', 'FREE', 'PRICEBAND', 'SIZEBAND', 'CONTENT_RATING', 'AD_SUPPORTED', 'COUNTRY', 'IN_APP_PURCHASES', 'EDITORS_CHOICE', 'DAYS_SINCE_UPDATE_RANGE', 'DAYS_SINCE_RELEASED_RANGE']]
 
 @st.cache(suppress_st_warning=True, allow_output_mutation=True)
