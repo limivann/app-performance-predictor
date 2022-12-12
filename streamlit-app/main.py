@@ -98,12 +98,12 @@ def header(text):
     st.markdown(f"<p style='font-weight:bolder;font-size:20px'>{text}</p>",unsafe_allow_html=True)
 
 
-@st.cache(suppress_st_warning=True)
+# @st.cache(suppress_st_warning=True)
 def get_cleaned_data():
     cleaned_data = pd.read_csv("./data/streamlit_eda.csv")
     return cleaned_data[['RATING', 'INSTALLS_GROUP', 'RATING_RATE', 'CATEGORY', 'REVIEW_RATE', 'FREE', 'PRICEBAND', 'SIZEBAND', 'CONTENT_RATING', 'AD_SUPPORTED', 'COUNTRY', 'IN_APP_PURCHASES', 'EDITORS_CHOICE', 'DAYS_SINCE_UPDATE_RANGE', 'DAYS_SINCE_RELEASED_RANGE']]
 
-@st.cache(suppress_st_warning=True, allow_output_mutation=True)
+# @st.cache(suppress_st_warning=True, allow_output_mutation=True)
 def get_model():
     model = pickle.load(open('./model/model.pkl', 'rb'))
     return model
