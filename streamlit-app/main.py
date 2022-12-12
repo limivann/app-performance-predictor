@@ -147,7 +147,7 @@ def draw_heatmap_corr(heatmap, format=".0f"):
     st.write(fig)
 
 # get images
-google_play_store_img_path = Path(__file__).parents[1] / "images/image_google_play-store.webp"
+google_play_store_img_path = Path(__file__).parents[1] / "streamlit-app/images/image_google_play-store.webp"
 google_play_store_img = Image.open(google_play_store_img_path)
 
 heatmap_img_path = Path(__file__).parents[1] / "streamlit-app/figures/heatmap_all.png"
