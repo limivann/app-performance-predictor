@@ -106,7 +106,8 @@ def get_cleaned_data():
 
 @st.cache(suppress_st_warning=True, allow_output_mutation=True)
 def get_model():
-    model = pickle.load(open('./model/model.pkl', 'rb'))
+    model_path = Path(__file__).parents[1] / "streamlit-app/model/model.pkl"
+    model = pickle.load(model_path, 'rb')
     return model
 
 condition = st.sidebar.selectbox(
@@ -146,23 +147,56 @@ def draw_heatmap_corr(heatmap, format=".0f"):
     st.write(fig)
 
 # get images
-google_play_store_img = Image.open('./images/image_google_play-store.webp')
-heatmap_img = Image.open('./figures/heatmap_all.png')
-treemap_html = open("./figures/treemap_all.html", 'r', encoding='utf-8').read()
-dist_installs_img = Image.open("./figures/distribution_installs.png")
-installs_grp_rating_img = Image.open("./figures/installs_group_rating.png")
-installs_grp_ec_img = Image.open("./figures/installs_group_editors_choice.png")
-installs_grp_free_img = Image.open("./figures/installs_group_free.png")
-installs_grp_ads_img = Image.open("./figures/installs_group_ad_supported.png")
-installs_grp_iap_img = Image.open("./figures/installs_group_iap.png")
-installs_grp_cr_img = Image.open("./figures/installs_group_cr.png")
-installs_grp_dsu_html = open("./figures/installs_group_dsu.html", 'r', encoding='utf-8').read()
-installs_grp_dsu_img = Image.open("./figures/installs_group_dsu.png")
-installs_grp_rc_html = open("./figures/installs_group_review_count.html", 'r', encoding='utf-8').read()
-installs_grp_rr_img = Image.open("./figures/installs_group_rr.png")
-installs_grp_size_html = open("./figures/installs_group_size.html", 'r', encoding='utf-8').read()
-installs_grp_cat_html = open("./figures/installs_group_category.html", 'r', encoding='utf-8').read()
-installs_grp_cat_free_img = Image.open("./figures/installs_group_cat_free.png")
+google_play_store_img_path = Path(__file__).parents[1] / "images/image_google_play-store.webp"
+google_play_store_img = Image.open(google_play_store_img_path)
+
+heatmap_img_path = Path(__file__).parents[1] / "streamlit-app/figures/heatmap_all.png"
+heatmap_img = Image.open(heatmap_img_path)
+
+treemap_html_path = Path(__file__).parents[1] / "streamlit-app/figures/treemap_all.html"
+treemap_html = open(treemap_html_path, 'r', encoding='utf-8').read()
+
+dist_installs_img_path = Path(__file__).parents[1] / "streamlit-app/figures/distribution_installs.png"
+dist_installs_img = Image.open(dist_installs_img_path)
+
+installs_grp_rating_img_path = Path(__file__).parents[1] / "streamlit-app/figures/installs_group_rating.png"
+installs_grp_rating_img = Image.open(installs_grp_rating_img_path)
+
+installs_grp_ec_img_path = Path(__file__).parents[1] / "streamlit-app/figures/installs_group_editors_choice.png"
+installs_grp_ec_img = Image.open(installs_grp_ec_img_path)
+
+installs_grp_ads_img_path = Path(__file__).parents[1] / "streamlit-app/figures/installs_group_ad_supported.png"
+installs_grp_ads_img = Image.open(installs_grp_ads_img_path)
+
+installs_grp_free_img_path = Path(__file__).parents[1] / "streamlit-app/figures/installs_group_free.png"
+installs_grp_free_img = Image.open(installs_grp_free_img_path)
+
+installs_grp_iap_img_path = Path(__file__).parents[1] / "streamlit-app/figures/installs_group_iap.png"
+installs_grp_iap_img = Image.open(installs_grp_iap_img_path)
+
+installs_grp_cr_img_path = Path(__file__).parents[1] / "streamlit-app/figures/installs_group_cr.png"
+installs_grp_cr_img = Image.open(installs_grp_cr_img_path)
+
+installs_grp_dsu_html_path = Path(__file__).parents[1] / "streamlit-app/figures/installs_group_dsu.html"
+installs_grp_dsu_html = open(installs_grp_dsu_html_path, 'r', encoding='utf-8').read()
+
+installs_grp_dsu_img_path = Path(__file__).parents[1] / "streamlit-app/figures/installs_group_dsu.png"
+installs_grp_dsu_img = Image.open(installs_grp_dsu_img_path)
+
+installs_grp_rc_html_path = Path(__file__).parents[1] / "streamlit-app/figures/installs_group_review_count.html"
+installs_grp_rc_html = open(installs_grp_rc_html_path, 'r', encoding='utf-8').read()
+
+installs_grp_rr_img_path = Path(__file__).parents[1] / "streamlit-app/figures/installs_group_rr.png"
+installs_grp_rr_img = Image.open(installs_grp_rr_img_path)
+
+installs_grp_size_html_path = Path(__file__).parents[1] / "streamlit-app/figures/installs_group_size.html"
+installs_grp_size_html = open(installs_grp_size_html_path, 'r', encoding='utf-8').read()
+
+installs_grp_cat_html_path = Path(__file__).parents[1] / "streamlit-app/figures/installs_group_category.html"
+installs_grp_cat_html = open(installs_grp_cat_html_path, 'r', encoding='utf-8').read()
+
+installs_grp_cat_free_img_path = Path(__file__).parents[1] / "streamlit-app/figures/installs_group_cat_free.png"
+installs_grp_cat_free_img = Image.open(installs_grp_cat_free_img_path)
 
 #pages
 if condition == 'Introduction':
