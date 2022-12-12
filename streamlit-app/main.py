@@ -107,7 +107,7 @@ def get_cleaned_data():
 @st.cache(suppress_st_warning=True, allow_output_mutation=True)
 def get_model():
     model_path = Path(__file__).parents[1] / "streamlit-app/model/model.pkl"
-    model = pickle.load(model_path, 'rb')
+    model = pickle.load(open(model_path, 'rb'))
     return model
 
 condition = st.sidebar.selectbox(
