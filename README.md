@@ -4,12 +4,13 @@ Predicting an app performance using Data Science.
 
 ## About The Project
 
-This is the mini project for SC1015 (Intro to Data Science and AI) which focuses on android market analysis and app perfomance predictor. For the entire walkthrough of the project, please view the notebooks in this order:
+This is the mini project for SC1015 (Intro to Data Science and AI) which focuses on android market analysis and app perfomance predictor. For the entire walkthrough of the project, please view the notebooks/readmes in this order:
 
-1. [Data Cleaning](https://github.com/limivann/app-rating-predictor/blob/main/data_cleaning.ipynb)
-2. [Exploratory Data Analysis and Visualization](https://github.com/limivann/app-rating-predictor/blob/main/EDA.ipynb)
-3. [Model Building](https://github.com/limivann/app-rating-predictor/blob/main/model_building.ipynb)
-4. [Machine Learning](https://github.com/limivann/app-rating-predictor/blob/main/machine_learning.ipynb)
+1. [Data Collection](https://github.com/limivann/app-performance-predictor/tree/main/google-play-scrapper)
+2. [Data Cleaning](https://github.com/limivann/app-rating-predictor/blob/main/data_cleaning.ipynb)
+3. [Exploratory Data Analysis and Visualization](https://github.com/limivann/app-rating-predictor/blob/main/EDA.ipynb)
+4. [Model Building](https://github.com/limivann/app-rating-predictor/blob/main/model_building.ipynb)
+5. [Machine Learning](https://github.com/limivann/app-rating-predictor/blob/main/machine_learning.ipynb)
 
 ## Project Folder Structure
 
@@ -38,7 +39,7 @@ This is the mini project for SC1015 (Intro to Data Science and AI) which focuses
 1. Decision Trees
 2. Random Forest Classifier
 
-## Takeways from EDA
+## Key takeways from our primary EDA
 
 1. More than half of the apps have 100K-100M installs.
 2. The average rating of an app is 4.16
@@ -54,12 +55,12 @@ For model simulation and visualization purposes, we have created a web app for t
 
 ## Conclusion
 
-1. Oversampling the data did not improved model performance due to overfitting.
+1. Oversampling the data did not improve the models’ performance on the test data because of overfitting.
 2. We are able to achieve over 80% accuracy in predicting if an app would exceed one million installs in a year.
 3. Strategies to increase the number of installs of an app may include:
    - Making the app free of charge
    - Increase the rating count of the app
-   - Increase the review count if the app
+   - Increase the review count of the app
 4. The number of installs of an app does not depends entirely on its feature. It might depend on qualitative features such as reviews. Hence one thing that we could improve upon is to do sentimental analysis on the reviews using NLP.
 
 ## Contributors
